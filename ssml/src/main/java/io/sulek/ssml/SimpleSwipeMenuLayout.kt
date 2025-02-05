@@ -27,11 +27,12 @@ class SimpleSwipeMenuLayout @JvmOverloads constructor(context: Context, attrs: A
     private var backgroundContainerWidth = 0
     private var halfBackgroundContainerWidth = 0
 
-    private var isExpanded = false
     private var isMenuOnTheLeft = true
     private var dynamicMenuWidth = true
     private var measureBackgroundContainerWidth = true
 
+    var isExpanded = false
+        private set
     var touchEventCallback: ((View, MotionEvent) -> Unit)? = null
     var isInterceptTouch = true
 
