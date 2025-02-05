@@ -10,12 +10,12 @@ Swipeable layout for Android
 ## 1. Dependency
 
 ```
-implementation 'io.sulek.ssml:simpleswipemenulayout:1.0.4'
+implementation 'com.github.JustSAT:SimpleSwipeMenuLayout-SSML:1.0.6'
 ```
 ```
 repositories {
     maven {
-        url  "https://jcenter.bintray.com" 
+        url  "https://jitpack.io" 
     }
 }
 ```
