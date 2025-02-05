@@ -32,6 +32,9 @@ class SimpleSwipeMenuLayout @JvmOverloads constructor(context: Context, attrs: A
     private var dynamicMenuWidth = true
     private var measureBackgroundContainerWidth = true
 
+    var touchEventCallback: ((View, MotionEvent) -> Unit)? = null
+    var isInterceptTouch = true
+
     init {
         attrs?.let { getAttributes(context, it) }
     }
@@ -127,14 +130,16 @@ class SimpleSwipeMenuLayout @JvmOverloads constructor(context: Context, attrs: A
         }
     }
 
-    private fun getOnTouchListener() = OnTouchListener { _, event ->
+    @SuppressLint("ClickableViewAccessibility")
+    private fun getOnTouchListener() = OnTouchListener { v, event ->
         when (event.action) {
             MotionEvent.ACTION_DOWN -> onPressDown(event.x)
             MotionEvent.ACTION_UP -> onReleasePress(false)
             MotionEvent.ACTION_CANCEL -> onReleasePress(true)
             MotionEvent.ACTION_MOVE -> onMove(event.x)
         }
-        true
+        touchEventCallback?.invoke(v, event)
+        isInterceptTouch
     }
 
     private fun onPressDown(position: Float) {
